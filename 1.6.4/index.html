@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+	<meta name="description" content="在浏览器里玩MC" />
+	<meta name="keywords" content="mcjs.cc, mcjs, mc.js, eaglercraft, minecraft, webmc" />
+	<title>MCJS 1.6.4</title>
+	<link type="image/png" rel="shortcut icon" href="https://mcjs.cc/favicon.png" />
+	<script type="text/javascript" src="eagswebrtc.js"></script>
+	<script type="text/javascript" src="classes.js"></script>
+	<script type="text/javascript">
+		if (document.location.href.startsWith("file:")) {
+			alert("You're not supposed to 'open' this file in your browser. Please upload this folder to your HTTP(s) server and access it via the internet. This is not a bug, please read the documentation");
+		} else {
+			window.addEventListener("load", async function () {
+				const relayId = 2;
+				window.eaglercraftOpts = {
+					container: "game_frame", assetsURI: "assets.epk", serverWorkerURI: "worker_bootstrap.js", worldsFolder: "worlds",
+					relays: [
+						{ addr: "wss://relay.deev.is/", name: "lax1dude relay #1", primary: relayId == 0 },
+						{ addr: "wss://relay.lax1dude.net/", name: "lax1dude relay #2", primary: relayId == 1 },
+						{ addr: "wss://relay.shhnowisnottheti.me/", name: "ayunami relay #1", primary: relayId == 2 }
+					],
+					mainMenu: {
+						splashes: [
+							"MCJS.CC"
+						], eaglerLogo: false
+					}
+				};
+				(function () {
+					var q = window.location.search;
+					if (typeof q === 'string' && q.startsWith("?")) {
+						q = new URLSearchParams(q);
+						var s = q.get("server");
+						if (s) window.eaglercraftOpts.joinServer = s;
+					}
+				})();
+				main();
+			});
+		}
+	</script>
+</head>
+
+<body style="margin:0px;width:100vw;height:100vh;" id="game_frame">
+<!-- Cloudflare Pages Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "320df8b1652c43f5956a82109dec39e6"}'></script><!-- Cloudflare Pages Analytics --></body>
+
+</html>
