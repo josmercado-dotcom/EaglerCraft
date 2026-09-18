@@ -1,1 +1,2 @@
-cross-origin-opener-policy: same-origin
+/:
+Cross-Origin-Opener-Policy:same-origin new line, Cross-Origin-Embedder-Policy:require-corp.
